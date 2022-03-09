@@ -1,0 +1,27 @@
+steps:
+  # Build and push the container image
+  - name: 'gcr.io/kaniko-project/executor:v1.6.0'
+    args:
+      - --destination
+      - gcr.io/$PROJECT_ID/hive-graph
+      - --dockerfile
+      - Dockerfile.production
+      - --cache=true
+
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - run
+      - deploy
+      - hive-graph
+      - --image
+      - gcr.io/$PROJECT_ID/hive-graph
+      - --region
+      - asia-southeast1
+      - --platform
+      - managed
+      - --allow-unauthenticated
+
+timeout: 1800s
+options:
+  machineType: 'N1_HIGHCPU_8'
