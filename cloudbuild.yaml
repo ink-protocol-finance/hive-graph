@@ -3,7 +3,7 @@ steps:
   - name: 'gcr.io/kaniko-project/executor:latest'
     args:
       - --destination
-      - gcr.io/$PROJECT_ID/hive-graph
+      - gcr.io/$PROJECT_ID/$REPO_NAME
       - --dockerfile
       - Dockerfile.production
       - --cache=true
@@ -18,9 +18,6 @@ steps:
       - gcr.io/$PROJECT_ID/$REPO_NAME
       - --region
       - asia-southeast1
-      - --platform
-      - managed
-      - --allow-unauthenticated
 
 timeout: 1800s
 options:
