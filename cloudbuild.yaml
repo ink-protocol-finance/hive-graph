@@ -1,6 +1,6 @@
 steps:
   # Build and push the container image
-  - name: 'gcr.io/kaniko-project/executor:v1.6.0'
+  - name: 'gcr.io/kaniko-project/executor:latest'
     args:
       - --destination
       - gcr.io/$PROJECT_ID/hive-graph
@@ -13,9 +13,9 @@ steps:
     args:
       - run
       - deploy
-      - hive-graph
+      - $REPO_NAME
       - --image
-      - gcr.io/$PROJECT_ID/hive-graph
+      - gcr.io/$PROJECT_ID/$REPO_NAME
       - --region
       - asia-southeast1
       - --platform
