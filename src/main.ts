@@ -9,7 +9,7 @@ import { Logger } from 'nestjs-pino'
 import { AppModule } from './app.module'
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule, { bufferLogs: true })
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, { bufferLogs: true, cors: true })
   const configService = app.get(ConfigService)
   const port = parseInt(configService.get<string>('PORT', ''), 10)
   const env = configService.get<string>('NODE_ENV', 'production')
